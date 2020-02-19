@@ -1,0 +1,31 @@
+{% extends 'baseTemplate.html' %}
+
+{% block content %}
+
+<div class="container" style="height: 80vh;">
+    <div class="row my-5">
+        <div class="list-group col-12 col-lg-3 p-2">
+            <a href="#" class="list-group-item list-group-item-action active text-uppercase">HI
+                {{user.username}}!</a>
+            <a href="{% url 'articles:create' %}" class="list-group-item list-group-item-action">ADD ARTICLE</a>
+            <a href="#" class="list-group-item list-group-item-action">CHANGE PROFIL PICTURE</a>
+            <form action="{% url 'accounts:logout' %}" method="post" style="margin-top: -1px;">
+                {% csrf_token %}
+                <button class="list-group-item list-group-item-action">LOG OUT</button>
+            </form>
+
+        </div>
+        <div class="list-group col-12 col-lg-9 p-2">
+            <span class="list-group-item active text-uppercase">ACCOUNT DETAILS</span>
+            <div class="list-group-item d-flex account-details-img">
+                <img src="https://pbs.twimg.com/media/ECDNFYSWwAANZOE.jpg" class="rounded" width="128px" height="128px">
+                <div class="account-details px-2">
+                    <h3 class="py-1">{{user.first_name}} {{user.last_name}}</h3>
+                    <medium>{{user.email}}</medium>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'baseTemplate.html' %}
+
+{% block content %}
+<div class="article-detail text-dark">
+  <div class=" article-detail-img">
+  </div>
+  <article>
+    <div class="container" style="padding-bottom: 100px;">
+      <header>
+        <h1 class="text-uppercase py-2">{{article.title}}</h1>
+      </header>
+      <div class="article-detail-metadata">
+        <a class="mr-2" href="#">{{article.author}}</a>
+        <medium class="text-muted">{{article.date|date:"F d, Y"}}</medium>
+      </div>
+      <div class="article-detail-body py-5">
+        <p class="text-justify">{{article.content}}</p>
+      </div>
+    </div>
+  </article>
+</div>
+{% endblock %}

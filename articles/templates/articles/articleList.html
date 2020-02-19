@@ -1,0 +1,56 @@
+{% extends 'baseTemplate.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="articles col-sm-12 col-lg-9">
+      <article class="media m-2">
+        <ul class="list-unstyled">
+          {% for article in articles %}
+          <li class="media">
+            <img class="mr-3 rounded align-self-center d-none d-lg-block" src="{{article.imageSmall.url}}" alt="..."
+              width="128px" height="128px">
+            <div class="media-body">
+              <a class="article-title mt-0 mb-1"
+                href="{% url 'articles:detail' slug=article.slug %}">{{article.title}}</a>
+              <p class="py-2 text-justify">{{article.snippet}}</p>
+              <div class="media-metadata">
+                <a class="mr-2" href="#">{{article.author}}</a>
+                <medium class="text-muted">{{article.date|date:"F d, Y"}}</medium>
+              </div>
+            </div>
+
+          </li>
+          {% endfor %}
+        </ul>
+      </article>
+    </div>
+    <aside class="col-sm-12 col-lg-3 my-3">
+      <div class="list-group py-2">
+        <span class="list-group-item list-group-item-action active text-uppercase">SEARCH</span>
+        <div class="list-group-item">
+          <form class="form-inline">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" style="width:100%;">
+            <button class="btn btn-danger btn-block my-2" type="submit">SEARCH</button>
+          </form>
+        </div>
+      </div>
+      {% if user.is_authenticated %}
+      <div class="list-group py-2">
+        <span class="list-group-item list-group-item-action active">ARTICLES MENU</span>
+        <a href="{% url 'articles:create' %}" class="list-group-item list-group-item-action">ADD ARTICLE</a>
+        <a href="#" class="list-group-item list-group-item-action">DELETE ARTICLE</a>
+      </div>
+      {% endif %}
+      <div class="list-group py-2">
+        <a href="#" class="list-group-item list-group-item-action active text-uppercase">RECENTLY ADDED</a>
+        {% for article in articles %}
+        <a class="list-group-item list-group-item-action"
+          href="{% url 'articles:detail' slug=article.slug %}">{{article.title}}</a>
+        {% endfor %}
+      </div>
+    </aside>
+  </div>
+</div>
+{% endblock %}

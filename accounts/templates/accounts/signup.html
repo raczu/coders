@@ -1,0 +1,32 @@
+{% extends 'formTemplate.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center my-2">
+        <div class="card mx-3" style="background-color: #393e46;">
+            <div class="card-title mt-3 align-self-center px-5">
+                <a href="{% url 'home' %}"><img src="/media/snakeWhite.png" class="img-fluid" width="64px"
+                        height="64px"></a>
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success mx-5 my-3">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            <div class="card-body px-5">
+                <form class="form-group" action="/accounts/signup/" method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <br />
+                    <button type="submit" class="btn btn-danger btn-block">REGISTER</button>
+                </form>
+                <p class="mt-3 text-center">Do you have an account? <a href="{% url 'accounts:login' %}">Login</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
